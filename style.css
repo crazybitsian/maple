@@ -450,6 +450,10 @@ h3 {
 }
 
 /* Philosophy Section - Architectural Grid */
+.philosophy-section {
+    padding-bottom: 159px !important;
+}
+
 .philosophy-grid {
     display: grid;
     grid-template-columns: 1fr 1.2fr;
@@ -516,9 +520,9 @@ h3 {
 .slideshow-section {
     background-color: var(--bg-color);
     position: relative;
-    padding: 6rem 0;
+    padding: 0 !important;
     overflow: hidden;
-    scroll-margin-top: -195px !important; /* Moved gallery 5px down */
+    scroll-margin-top: -91px !important; /* Moved gallery 46px up */
 }
 
 .slideshow-wrapper {
@@ -544,14 +548,7 @@ h3 {
 }
 
 .archive-caption {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-top: 1.5rem;
-    text-align: center;
-    opacity: 0.8;
+    display: none !important;
 }
 
 .slideshow-track {
@@ -633,7 +630,8 @@ h3 {
 
 /* Offerings Section */
 .offerings-section {
-    padding-bottom: 2rem;
+    padding-top: 159px !important;
+    padding-bottom: 159px !important;
 }
 
 .accordion-list {
@@ -753,13 +751,19 @@ h3 {
     font-size: 1rem;
     line-height: 1.6;
 }
+/* Process Section */
+.process-section {
+    padding-top: 159px !important;
+    padding-bottom: 0 !important;
+}
 
 /* Packages Section */
 .packages-section {
     position: relative;
     background-color: #080808;
-    padding: 1rem 0 3rem 0; /* Minimized top padding to pull it up */
-    scroll-margin-top: 5px !important; /* Adjusted to move 25px up */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    scroll-margin-top: 15px !important; /* Moved packages 10px down */
 }
 
 .packages-header {
@@ -915,7 +919,7 @@ h3 {
 /* Inquiry Form */
 .inquiry-section {
     background-color: var(--bg-color);
-    padding-top: 140px !important; /* 20px higher than the default 160px */
+    padding-top: 159px !important;
     scroll-margin-top: 0 !important; 
 }
 
