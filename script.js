@@ -106,41 +106,95 @@ document.addEventListener("DOMContentLoaded", () => {
             ease: "none"
         });
 
-        // Horizontal Scroll Section
-        const horizontalSection = document.querySelector('.horizontal-scroll-section');
-        const horizontalTrack = document.getElementById('horizontal-track');
-        
-        // Calculate total scroll distance
-        function getScrollAmount() {
-            let trackWidth = horizontalTrack.scrollWidth;
-            return -(trackWidth - window.innerWidth);
+        // Premium Staggered Reveal for Process Steps
+        gsap.fromTo('.process-step', 
+            { opacity: 0, y: 40 },
+            {
+                scrollTrigger: {
+                    trigger: '.process-grid',
+                    start: "top 80%"
+                },
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                stagger: 0.15, // elegant, fast ripple
+                ease: "power2.out"
+            }
+        );
+
+        // Slideshow Logic
+        const track = document.getElementById('slideshow-track');
+        const paginationContainer = document.getElementById('slideshow-pagination');
+        if (track && paginationContainer) {
+            const items = track.querySelectorAll('.slideshow-item');
+            
+            // Create dots
+            items.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    const itemLeft = items[index].offsetLeft;
+                    track.scrollTo({
+                        left: itemLeft - (track.clientWidth / 2) + (items[index].clientWidth / 2),
+                        behavior: 'smooth'
+                    });
+                });
+                paginationContainer.appendChild(dot);
+            });
+
+            const dots = paginationContainer.querySelectorAll('.dot');
+            let isAutoPlaying = true;
+            let currentIndex = 0;
+
+            // Update active dot and slide classes on scroll using IntersectionObserver
+            // We use a tight rootMargin so only the item precisely in the middle of the screen is considered intersecting.
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const index = Array.from(items).indexOf(entry.target);
+                        currentIndex = index;
+                        
+                        // Update dots
+                        dots.forEach((dot, i) => {
+                            dot.classList.toggle('active', i === index);
+                        });
+                        
+                        // Update slide classes
+                        items.forEach((item, i) => {
+                            item.classList.toggle('is-active', i === index);
+                        });
+                    }
+                });
+            }, {
+                root: track,
+                rootMargin: '0px -49% 0px -49%', // Only the absolute center
+                threshold: 0
+            });
+
+            items.forEach(item => observer.observe(item));
+
+            // Auto-play logic
+            let autoPlayInterval = setInterval(() => {
+                if (!isAutoPlaying) return;
+                let nextIndex = currentIndex + 1;
+                if (nextIndex >= items.length) nextIndex = 0;
+                
+                const itemLeft = items[nextIndex].offsetLeft;
+                track.scrollTo({
+                    left: itemLeft - (track.clientWidth / 2) + (items[nextIndex].clientWidth / 2),
+                    behavior: 'smooth'
+                });
+            }, 3500);
+
+            // Pause auto-play on touch/hover
+            track.addEventListener('mouseenter', () => isAutoPlaying = false);
+            track.addEventListener('mouseleave', () => isAutoPlaying = true);
+            track.addEventListener('touchstart', () => isAutoPlaying = false, {passive: true});
+            track.addEventListener('touchend', () => {
+                setTimeout(() => { isAutoPlaying = true; }, 2000);
+            }, {passive: true});
         }
-
-        const tl = gsap.timeline();
-        
-        tl.to(horizontalTrack, {
-            x: getScrollAmount,
-            ease: "none"
-        }, 0);
-
-        const progressBar = document.querySelector('.scroll-progress-bar');
-        if (progressBar) {
-            tl.fromTo(progressBar, 
-                { scaleX: 0 },
-                { scaleX: 1, ease: "none", transformOrigin: "left center" }, 
-                0
-            );
-        }
-
-        ScrollTrigger.create({
-            trigger: horizontalSection,
-            start: "top top",
-            end: () => `+=${getScrollAmount() * -1}`,
-            pin: true,
-            animation: tl,
-            scrub: 1, // Smooth scrubbing
-            invalidateOnRefresh: true // Recalculate on resize
-        });
 
     } else {
         // Fallback for reveals if GSAP fails to load
