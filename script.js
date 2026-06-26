@@ -79,7 +79,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // GSAP ScrollTrigger Animations (requires GSAP & ScrollTrigger to be loaded)
-    if (typeof gsap !== 'undefined') {
+    requestAnimationFrame(() => {
+        if (typeof gsap !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
         // Standard Reveals
@@ -200,7 +201,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     } else {
-        // Fallback for reveals if GSAP fails to load
+        }
+    });
+
+    // Fallback for reveals if GSAP fails to load
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
