@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maple-woad.vercel.app/sitemap.xml
