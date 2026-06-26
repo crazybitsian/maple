@@ -589,7 +589,6 @@ h3 {
     }
 }
 
-
 .slideshow-item img {
     aspect-ratio: 4/5;
     width: 100%;
@@ -632,6 +631,10 @@ h3 {
 .offerings-section {
     padding-top: 159px !important;
     padding-bottom: 159px !important;
+    position: relative;
+    z-index: 2;
+    background-color: transparent;
+    scroll-margin-top: -87px !important;
 }
 
 .accordion-list {
@@ -705,12 +708,6 @@ h3 {
     color: var(--accent);
 }
 
-/* Process Section */
-.process-section {
-    position: relative;
-    padding-bottom: 4rem;
-}
-
 .process-section h2 {
     font-family: var(--font-serif);
     font-size: 4rem;
@@ -718,41 +715,9 @@ h3 {
     margin-bottom: 5rem;
 }
 
-.process-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 3rem;
-    position: relative;
-}
-
-.process-step {
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid rgba(255, 255, 255, 0.15);
-    padding-top: 2rem;
-}
-
-.step-number {
-    font-family: var(--font-serif);
-    font-size: 3.5rem;
-    color: var(--accent);
-    line-height: 1;
-    margin-bottom: 1.5rem;
-}
-
-.process-step h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    font-weight: 400;
-}
-
-.process-step p {
-    color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.6;
-}
 /* Process Section */
 .process-section {
+    position: relative;
     padding-top: 159px !important;
     padding-bottom: 0 !important;
 }
