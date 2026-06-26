@@ -79,8 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // GSAP ScrollTrigger Animations (requires GSAP & ScrollTrigger to be loaded)
-    requestAnimationFrame(() => {
-        if (typeof gsap !== 'undefined') {
+    if (typeof gsap !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
 
         // Standard Reveals
@@ -211,8 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        }
-    });
+    }
 
     // Custom Select Implementation
     const customSelects = document.getElementsByClassName("custom-select");
