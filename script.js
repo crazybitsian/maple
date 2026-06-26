@@ -201,10 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
     } else {
-        }
-    });
-
-    // Fallback for reveals if GSAP fails to load
+        // Fallback for reveals if GSAP fails to load
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) {
@@ -214,7 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    }
+        }
+    });
 
     // Custom Select Implementation
     const customSelects = document.getElementsByClassName("custom-select");
